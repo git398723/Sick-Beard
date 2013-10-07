@@ -264,6 +264,10 @@ class GenericProvider:
                 logger.log(u"Ignoring result " + title + " because we don't want an episode that is " + Quality.qualityStrings[quality], logger.DEBUG)
                 continue
 
+            if not episode.show.wantEpisodeLanguage(title, episode.name, manualSearch):
+                logger.log(u"Ignoring result " + title + " because we don't want an episode with that language", logger.DEBUG)
+                continue
+
             logger.log(u"Found result " + title + " at " + url, logger.DEBUG)
 
             result = self.getResult([episode])

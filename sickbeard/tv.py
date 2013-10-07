@@ -882,6 +882,27 @@ class TVShow(object):
         logger.log(u"None of the conditions were met so I'm just saying no", logger.DEBUG)
         return False
 
+    def wantEpisodeLanguage(self, title, name, manualSearch=False):
+        logger.log(u"Checking if we want episode " + title, logger.DEBUG)
+        
+        title_low = title.lower().replace("."," ")
+        name_low = name.lower().replace(u"\u00e4","ae").replace(u"\u00f6","oe").replace(u"\u00fc","ue").replace("."," ")
+        
+        if self.lang == 'en' and "german" not in title_low and "french" not in title_low and "spanish" not in title_low and "dutch" not in title_low and "swedish" not in title_low:
+            return True
+        elif self.lang =='de' and "german" in title_low:
+            return True
+        elif self.lang =="fr" and "french" in title_low:
+            return True
+        elif self.lang =="es" and "spanish" in title_low:
+            return True
+        elif self.lang =='nl' and " nl" in title_low or "dutch" in title_low:
+            return True
+        elif name_low in title_low:
+            return True
+
+        return False
+
     def getOverview(self, epStatus):
 
         if epStatus == WANTED:
