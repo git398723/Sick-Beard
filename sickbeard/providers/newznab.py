@@ -187,7 +187,7 @@ class NewznabProvider(generic.NZBProvider):
         params = {"t": "tvsearch",
                   "maxage": sickbeard.USENET_RETENTION,
                   "limit": 100,
-                  "cat": '5030,5040'}
+                  "cat": '5000,5030,5040'}
 
         # if max_age is set, use it, don't allow it to be missing
         if max_age or not params['maxage']:
