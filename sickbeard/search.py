@@ -282,7 +282,7 @@ def findEpisode(episode, manualSearch=False):
             continue
         except Exception, e:
             logger.log(u"Error while searching "+curProvider.name+", skipping: "+ex(e), logger.ERROR)
-            logger.log(traceback.format_exc(), logger.DEBUG)
+            logger.log(traceback.format_exc(), logger.ERROR)
             continue
 
         didSearch = True
