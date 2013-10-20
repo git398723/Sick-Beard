@@ -31,7 +31,7 @@ from threading import Lock
 # apparently py2exe won't build these unless they're imported somewhere
 from sickbeard import providers, metadata
 
-from providers import ezrss, tvtorrents, torrentleech, btn, nzbsrus, newznab, womble, nzbx, omgwtfnzbs, hdbits
+from providers import ezrss, tvtorrents, torrentleech, btn, nzbsrus, newznab, womble, nzbx, omgwtfnzbs, hdbits, nzbindex, nzbclub
 from sickbeard.config import CheckSection, check_setting_int, check_setting_str, ConfigMigrator
 
 from sickbeard import searchCurrent, searchBacklog, showUpdater, versionChecker, properFinder, autoPostProcesser
@@ -197,6 +197,10 @@ NZBSRUS = False
 NZBSRUS_UID = None
 NZBSRUS_HASH = None
 
+NZBINDEX = False
+
+NZBCLUB = False
+
 NZBMATRIX = False
 NZBMATRIX_USERNAME = None
 NZBMATRIX_APIKEY = None
@@ -347,7 +351,7 @@ def initialize(consoleLogging=True):
                 USE_GROWL, GROWL_HOST, GROWL_PASSWORD, USE_PROWL, PROWL_NOTIFY_ONSNATCH, PROWL_NOTIFY_ONDOWNLOAD, PROWL_API, PROWL_PRIORITY, PROG_DIR, NZBMATRIX, NZBMATRIX_USERNAME, \
                 USE_PYTIVO, PYTIVO_NOTIFY_ONSNATCH, PYTIVO_NOTIFY_ONDOWNLOAD, PYTIVO_UPDATE_LIBRARY, PYTIVO_HOST, PYTIVO_SHARE_NAME, PYTIVO_TIVO_NAME, \
                 USE_NMA, NMA_NOTIFY_ONSNATCH, NMA_NOTIFY_ONDOWNLOAD, NMA_API, NMA_PRIORITY, \
-                NZBMATRIX_APIKEY, versionCheckScheduler, VERSION_NOTIFY, PROCESS_AUTOMATICALLY, \
+                NZBMATRIX_APIKEY, NZBINDEX, NZBCLUB, versionCheckScheduler, VERSION_NOTIFY, PROCESS_AUTOMATICALLY, \
                 KEEP_PROCESSED_DIR, TV_DOWNLOAD_DIR, TVDB_BASE_URL, MIN_SEARCH_FREQUENCY, \
                 showQueueScheduler, searchQueueScheduler, ROOT_DIRS, CACHE_DIR, ACTUAL_CACHE_DIR, TVDB_API_PARMS, \
                 NAMING_PATTERN, NAMING_MULTI_EP, NAMING_FORCE_FOLDERS, NAMING_ABD_PATTERN, NAMING_CUSTOM_ABD, \
@@ -594,6 +598,13 @@ def initialize(consoleLogging=True):
         NEWZBIN = bool(check_setting_int(CFG, 'Newzbin', 'newzbin', 0))
         NEWZBIN_USERNAME = check_setting_str(CFG, 'Newzbin', 'newzbin_username', '')
         NEWZBIN_PASSWORD = check_setting_str(CFG, 'Newzbin', 'newzbin_password', '')
+
+
+        CheckSection(CFG, 'NzbIndex')
+        NZBINDEX = bool(check_setting_int(CFG, 'NzbIndex', 'nzbindex', 0))
+
+        CheckSection(CFG, 'NzbClub')
+        NZBCLUB = bool(check_setting_int(CFG, 'NzbClub', 'nzbclub', 0))
 
         CheckSection(CFG, 'Womble')
         WOMBLE = bool(check_setting_int(CFG, 'Womble', 'womble', 1))
@@ -1100,6 +1111,12 @@ def save_config():
     new_config['Newzbin']['newzbin'] = int(NEWZBIN)
     new_config['Newzbin']['newzbin_username'] = NEWZBIN_USERNAME
     new_config['Newzbin']['newzbin_password'] = NEWZBIN_PASSWORD
+
+    new_config['NzbIndex'] = {}
+    new_config['NzbIndex']['nzbindex'] = int(NZBINDEX)
+
+    new_config['NzbClub'] = {}
+    new_config['NzbClub']['nzbclub'] = int(NZBCLUB)
 
     new_config['Womble'] = {}
     new_config['Womble']['womble'] = int(WOMBLE)

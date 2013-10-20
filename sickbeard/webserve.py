@@ -1101,6 +1101,10 @@ class ConfigProviders:
                 sickbeard.NZBMATRIX = curEnabled
             elif curProvider == 'newzbin':
                 sickbeard.NEWZBIN = curEnabled
+            elif curProvider == 'nzbindex':
+                sickbeard.NZBINDEX = curEnabled
+            elif curProvider == 'nzbclub':
+                sickbeard.NZBCLUB = curEnabled    
             elif curProvider == 'bin_req':
                 sickbeard.BINREQ = curEnabled
             elif curProvider == 'womble_s_index':

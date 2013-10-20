@@ -29,7 +29,7 @@ import datetime
 
 from name_parser.parser import NameParser, InvalidNameException
 
-resultFilters = ["(dir|sample|sub|nfo)fix", "sample", "(dvd)?extras"]
+resultFilters = ["sub(pack|s|bed|\.)", "(dir|sample|sub|nfo)fix", "sample", "(dvd)?extras"]
 
 
 def filterBadReleases(name):
@@ -225,7 +225,8 @@ def isGoodResult(name, show, log=True):
 
     if log:
         logger.log(u"Provider gave result " + name + " but that doesn't seem like a valid result for " + show.name + " so I'm ignoring it")
-    return False
+#    return False
+    return True
 
 
 def allPossibleShowNames(show):
