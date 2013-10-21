@@ -20,12 +20,10 @@ __all__ = ['ezrss',
            'hdbits',
            'tvtorrents',
            'torrentleech',
-           'nzbsrus',
            'nzbindex',
            'nzbclub',
            'womble',
            'btn',
-           'nzbx',
            'omgwtfnzbs'
            ]
 
